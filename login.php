@@ -11,24 +11,24 @@ include "form_login.php";
     	<link href="clientes.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <div class="login box">
-            <img alt="Tucano Tours SRL" src="img/tucano-tours.png"/>
+        <div id="login" class="box">
+            <div style="width:250px; margin-left:auto; margin-right:auto; margin-bottom:30px">
+                <img alt="Tucano Tours SRL" src="img/tucano-tours.png"/>
+            </div>
             <form action="" method="post" enctype="multipart/form-data">
-                <table width="140" align="center" border="0" cellspacing="0" cellpadding="0">
+                <table width="240" align="center" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                        <td>Usuario:</td>
-                        <td><input style="margin-left:10px; margin-top:10px;" name="usuario" type="text" class="input" value="<?php echo $_COOKIE['usucookie']; ?>" /></td>
+                        <td width="100" align="center">Usuario:</td>
+                        <td><input name="usuario" type="text" value="<?php echo $_COOKIE['usucookie']; ?>" /></td>
                     </tr>
                     <tr>
-                        <td>Clave:</td>
-                        <td><input style="margin-left:10px; margin-top:10px;" name="psw" type="password" class="input" value="<?php echo $_COOKIE['pswcookie']; ?>" /></td>
+                        <td align="center">Clave:</td>
+                        <td><input style="margin-top:10px" name="psw" type="password" value="<?php echo $_COOKIE['pswcookie']; ?>" /></td>
                     </tr>
-                    <tr>
-                        <td align="center" height="70" ><input type="submit" class="btn btn-inverse" value="Ingresar" /></td>
-                        <td>&nbsp;</td>
-                    </tr>
-
                 </table>
+                <div style="width:100px; margin-left:auto; margin-right:auto; margin-top:30px">
+                    <button class="btn btn-inverse" type="submit">Ingresar</button>
+                <div>
             </form>
         </div>
     </body>

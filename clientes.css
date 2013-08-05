@@ -3,7 +3,7 @@
 body{
 	background-image:url(bg.png);
 	background-repeat:repeat;
-	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	/*font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;*/
 }
 
 select {
@@ -152,8 +152,6 @@ tr {
 	overflow:auto;
 }
 
-/* ----------------------- */
-
 .box {
 	width:988px;
 	height:455px;
@@ -172,6 +170,10 @@ tr {
 	
 }
 
+/* ----------------------- */
+
+
+
 #wrapper {
 	width:1000px;
 	height:auto;
@@ -181,7 +183,7 @@ tr {
 	font-size:12px;
 }
 
-.login {
+#login {
 	width:300px;
 	height:300px;
 	margin-left:auto;
@@ -219,24 +221,6 @@ tr {
 	border: 0px;
 }
 
-#cliente {
-	/*width:950px;
-	height:100px;
-	border: 1px solid #333;
-	color:#ed2d2d;
-	background:#fff;
-	font-size:12px;
-	margin-left:auto;
-	margin-right:auto;
-	margin-bottom:5px;
-}*/
-
-#name {
-	font-size:14px;
-	border-right:solid #333 1px;
-	background-color:#999;
-	color:#FFF;
-}
 
 #tipos {
 	width:950px;
@@ -267,7 +251,7 @@ tr {
 }
 
 
-#term{
+#term {
 	margin-right: 6px;
 }
 
@@ -279,7 +263,7 @@ tr {
 	margin-right:15px;
 }
 
-.tipo_cliente{
+.tipo_cliente {
 	cursor:pointer;
 }
 
@@ -331,3 +315,6 @@ tr {
 	color: #888;
 }
 
+#login input {
+  width: 100px !important;
+}
