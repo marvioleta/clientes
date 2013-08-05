@@ -25,8 +25,8 @@
 		<div id="wrapper">
 			<div id="ttip" style="display:none;"></div>
 			<div id="dialogs"><?php include "dialogs.php" ?></div>
-			<div id="nav"><?php include "nav.php" ?></div>
-			<div id="listado">
+			<div id="navbar"><?php include "nav.php" ?></div>
+			<div id="listado" class="box overflow-auto">
 				<div class="clientes"></div>
 			</div>
 			<div class="btn-group float-right" id="nav">

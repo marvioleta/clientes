@@ -148,9 +148,13 @@ tr {
 	margin:2px;
 }
 
+.overflow-auto {
+	overflow:auto;
+}
+
 /* ----------------------- */
 
-#listado {
+.box {
 	width:988px;
 	height:455px;
 	/*float:left;*/
@@ -165,13 +169,13 @@ tr {
 	/*-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;*/
-	overflow:auto;
+	
 }
 
 #wrapper {
 	width:1000px;
-	height:700px;
-	padding-top:130px;
+	height:auto;
+	padding-top:140px;
 	margin-left:auto;
 	margin-right:auto;
 	font-size:12px;
@@ -179,12 +183,10 @@ tr {
 
 .login {
 	width:300px;
-	height:180px;
+	height:300px;
 	margin-left:auto;
 	margin-right:auto;
 	margin-top:200px;	
-	padding:5px;
-	border: 1px solid #333;
 	text-shadow:#666 1px;	
 }
 
@@ -256,7 +258,7 @@ tr {
 	padding:2px;	
 }
 
-#nav {
+#navbar {
 	width:1000px;
 	margin-left:auto;
 	margin-right:auto;
@@ -329,6 +331,3 @@ tr {
 	color: #888;
 }
 
-#cerrar-sesion {
-	margin-left:250px;
-}

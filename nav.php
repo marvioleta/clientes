@@ -3,7 +3,7 @@
         <!--<a class="brand" href="#">Title</a>-->
         <ul class="nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Buscar por...<b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Buscar por:&nbsp;<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li selected value="nombre"><a href="#">Nombre</a></li>
                     <li value="cli_cod"><a href="#">Código VSTOUR</a></li>
@@ -24,49 +24,44 @@
             </li>
             <form class="navbar-search" action="">
                 <input class="search-query span2" type="text" placeholder="Search">
-                <button class="btn btn-mini" type="submit">
-                    <i class="icon-search"></i>
+                <button class="btn btn-danger btn-mini" type="submit">
+                    <i class="icon-search icon-white"></i>
                 </button>
             </form>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">VER<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Todos los Clientes</a></li>
-                    <li><a href="#">Tipos de Cliente</a></li>
+                    <li><a id="ver-clientes" href="#">Todos los Clientes</a></li>
+                    <li><a id="ver-tipo" href="#">Tipos de Cliente</a></li>
                 </ul>
             </li>
-            <!--<?php
+            <?php
                 $rol = $_SESSION['rol'];
                 if ($rol == 'a' || $rol == 'adm' || $rol == 'l') {
-                    echo '<a id="crear" class="btn">Ingresar Cliente</a>';
+            ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">CREAR<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a id="crear" href="#">Cliente</a></li>
+                        <?php
+                        if ($rol == 'a') {
+                            ?>
+                        <li><a id="crear-tipo" href="#">Tipo de Cliente</a></li>
+                        <?php } ?>
+                    </ul>
+                </li>
+            <?php
                 }
-                if ($_SESSION['rol'] == 'a') {
-                    echo '<a id="crear-tipo" class="btn">Crear Tipo de Cliente</a>';
-                }
-            ?>-->
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">EDITAR<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Cliente</a></li>
-                    <li><a href="#">Tipo de Cliente</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
+            ?>
+            <li id="filtro" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-filter"></i>FILTRAR<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a id="filtro-notas">Notas</a></li>
                 </ul>
             </li>
-            <!--<div class="btn-group">
-                <a href="#" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-filter"></i> Filtrar <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a id="filtro-notas">Notas</a></li>
-                </ul>
-            </div><!--btn-group filtro-->
-            <div id="cerrar-sesion" class="btn-group">
-                <button class="btn btn-inverse" type="submit">Cerrar Sesión</button>
-            </div>
         </ul><!--nav-->
+        <img id="cargando" src="ajax-loader.gif"/>
+        <button id="cerrar-sesion" class="btn btn-inverse pull-right" type="submit">Cerrar Sesión</button>
     </div><!--navbar-inner-->
 </div><!--navbar-->
 
