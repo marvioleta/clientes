@@ -26,7 +26,7 @@
 			<div id="ttip" style="display:none;"></div>
 			<div id="dialogs"><?php include "dialogs.php" ?></div>
 			<div id="navbar"><?php include "nav.php" ?></div>
-			<div id="listado" class="box overflow-auto">
+			<div id="listado" class="box shadow overflow-auto">
 				<div class="clientes"></div>
 			</div>
 			<div class="btn-group float-right" id="nav">

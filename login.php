@@ -6,12 +6,12 @@ include "form_login.php";
     <head>
     	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     	<link rel="shortcut icon" href="tucano.ico" type="image/x-icon" />
-    	<title>Ingresar al Administrador de Clientes</title>
+    	<title>Administrador de Clientes - Ingresar</title>
         <link href="//api.tucanotours.com.ar/bs/css/todc.bs.css" rel="stylesheet">
     	<link href="clientes.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <div id="login" class="box">
+        <div id="login" class="box shadow">
             <div style="width:250px; margin-left:auto; margin-right:auto; margin-bottom:30px">
                 <img alt="Tucano Tours SRL" src="img/tucano-tours.png"/>
             </div>

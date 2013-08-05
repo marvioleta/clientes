@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <!--<a class="brand" href="#">Title</a>-->
         <ul class="nav">
-            <li class="dropdown">
+            <li class="dropdown" id="term">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Buscar por:&nbsp;<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li selected value="nombre"><a href="#">Nombre</a></li>
