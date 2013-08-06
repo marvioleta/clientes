@@ -10,7 +10,7 @@
 
 			<div class="row">
 
-				<div align="center" class="span3">
+				<div class="span3">
 
 					<label class="titulo_rojo">${nombre}</label>
 
@@ -26,7 +26,7 @@
 
 				</div>
 
-				<div class="span3"><label class="titulo">Tipo de Cliente:</label>
+				<div class="span2" align="center"><label class="titulo">Tipo de Cliente:</label>
 
 					{{if tipo_cliente != "tucano" && tipo_cliente != "emisora" && tipo_cliente != "TUCANO" && tipo_cliente != "EMISORA" }}
 
@@ -40,11 +40,11 @@
 
 				</div>
 
-				<div class="span2"><label class="titulo">Addin SCI:</label> ${sci}</div>
+				<div class="span2" align="center"><label class="titulo">Cotización SCI:</label> ${sci}</div>
 
-				<div class="span1"><label class="titulo">Motor SCI:</label> ${motor_sci}</div>
+				<div class="span2" align="center"><label class="titulo">Emisión SCI:</label> ${motor_sci}</div>
 
-				<div class="span3">
+				<div class="span3" align="center">
 
 					<a class="ver_detalle float-right" href="#">Ver Detalles</a>
 
@@ -92,41 +92,41 @@
 
 				<div class="row">
 
-					<div class="span4"><label class="titulo">Terminal Web:</label> ${web_terminal}</div>
+					<div class="span3"><label class="titulo">Terminal Web:</label> ${web_terminal}</div>
 
 					<div class="span4"><label class="titulo">GDS Tucano:</label> ${gds_tucano}</div>
 
-					<div class="span4"><label class="titulo">GDS Propio:</label> ${gds_propio}</div>
+					<div class="span5"><label class="titulo">GDS Propio:</label> ${gds_propio}</div>
 
 				</div>
 
 				<div class="row">
 
-					<div class="span4"><label class="titulo">Código VSTOUR:</label> ${cli_cod}</div>
+					<div class="span3"><label class="titulo">Código VSTOUR:</label> ${cli_cod}</div>
 
 					<div class="span4"><label class="titulo">Razón Social:</label> ${factura}</div>
 
-					<div class="span4"><label class="titulo">Vendedor:</label> ${vendedor}</div>
+					<div class="span5"><label class="titulo">Vendedor:</label> ${vendedor}</div>
 
 				</div>
 
 				<div class="row">
 
-					<div class="span4"><label class="titulo">E-mail:</label> ${mail}</div>
+					<div class="span3"><label class="titulo">E-mail:</label> ${mail}</div>
 
 					<div class="span4"><label class="titulo">Dirección:</label> ${direccion}</div>
 
-					<div class="span4"><label class="titulo">Localidad:</label> ${localidad}</div>
+					<div class="span5"><label class="titulo">Localidad:</label> ${localidad}</div>
 
 				</div>
 
 				<div class="row">
 
-					<div class="span4"><label class="titulo">Telefono: </label> ${telefono}</div>
+					<div class="span3"><label class="titulo">Telefono: </label> ${telefono}</div>
 
 					<div class="span4"><label class="titulo"></label></div>
 
-					<div class="span4"><label class="titulo"></label></div>
+					<div class="span5"><label class="titulo"></label></div>
 
 				</div>
 
@@ -136,11 +136,11 @@
 
 					<div align="left" class="span12 borde_rojo"><strong>Datos Administrativos:</strong></div>
 
-					<div class="span4"><label class="titulo">Tipo de Garantía:</label> ${tipo_garantia}</div>
+					<div class="span3"><label class="titulo">Tipo de Garantía:</label> ${tipo_garantia}</div>
 
 					<div class="span4"><label class="titulo">Monto Garantía:</label> ${monto_garantia}</div>
 
-					<div class="span4"><label class="titulo">CUIT:</label> ${cuit} </div>
+					<div class="span5"><label class="titulo">CUIT:</label> ${cuit} </div>
 
 				</div>
 
@@ -162,13 +162,11 @@
 
 						<div align="left" class="span12 borde_rojo"><strong>Notas:</strong></div>
 
-						<div class="span3" align="center"><label class="titulo"><strong>Fecha</strong></div>
+						<div class="span3"><label class="titulo">Fecha:</div>
 
-						<div class="span3" align="center"><label class="titulo"><strong>Usuario</strong></div>
+						<div class="span4"><label class="titulo">Usuario:</div>
 
-						<div class="span5" align="center"><label class="titulo"><strong>Notas</strong></div>
-
-						<div class="span1"></div>
+						<div class="span5"><label class="titulo">Notas:</div>
 
 					</div>
 

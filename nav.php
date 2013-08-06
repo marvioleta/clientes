@@ -9,8 +9,8 @@
                     <li value="cli_cod"><a href="#">Código VSTOUR</a></li>
                     <li value="fac"><a href="#">Razón Social</a></li>
                     <li value="tipo_cliente"><a href="#">Tipo Cliente</a></li>
-                    <li value="sci"><a href="#">Addin SCI</a></li>
-                    <li value="motor_sci"><a href="#">Motor SCI</a></li>
+                    <li value="sci"><a href="#">Cotización SCI</a></li>
+                    <li value="motor_sci"><a href="#">Emisión SCI</a></li>
                     <li value="web_terminal"><a href="#">Web Terminal</a></li>
                     <li value="gds_tucano"><a href="#">GDS Tucano</a></li>
                     <li value="gds_propio"><a href="#">GDS Propio</a></li>
