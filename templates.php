@@ -224,11 +224,11 @@
 
 <script id="tiposTemplate" type="jquery/x-jquery-tmpl">
 
-	<div class="caja backcolor borde radius">
+	<div class="caja backcolor borde_blanco">
 
 		<div class="centrar">
 
-			<div class="row borde radius bgcolor margin height_titulo">
+			<div class="row borde_blanco bgcolor margin height_titulo">
 
 				<div class="row">
 
@@ -260,7 +260,7 @@
 
 			<div class="row">
 
-				<div class="span6 borde radius bgcolor margin">
+				<div class="span6 borde_blanco bgcolor margin">
 
 					<div align="center" class="borde_rojo"><label><strong>Emisión</strong></label></div>
 
@@ -290,7 +290,7 @@
 
 				</div>
 
-				<div class="span6 borde radius bgcolor margin">
+				<div class="span6 borde_blanco bgcolor margin">
 
 					<div align="center" class="borde_rojo"><label><strong>GUARDIA</strong></label></div>
 
@@ -320,7 +320,7 @@
 
 			<div class="row">
 
-				<div class="span6 borde radius bgcolor margin">
+				<div class="span6 borde_blanco bgcolor margin">
 
 					<div align="center" class="borde_rojo"><label><strong>Fee</strong></label></div>
 
@@ -338,7 +338,7 @@
 
 				</div>
 
-				<div class="span6 borde radius bgcolor margin">
+				<div class="span6 borde_blanco bgcolor margin">
 
 					<div align="center" class="borde_rojo"><label><strong>Reemisión</strong></label></div>
 
@@ -360,7 +360,7 @@
 
 			<div class="row">
 
-				<div class="span6 borde radius bgcolor margin">
+				<div class="span6 borde_blanco bgcolor margin">
 
 					<div align="center" class="borde_rojo"><label><strong>Fees emisión por Compañia</strong></label></div>
 
@@ -392,7 +392,7 @@
 
 				</div>
 
-				<div class="span6 borde radius bgcolor margin">
+				<div class="span6 borde_blanco bgcolor margin">
 
 					<div align="center" class="borde_rojo"><label><strong>BT</strong></label></div>
 
@@ -428,7 +428,7 @@
 
 			<div class="row">
 
-				<div class="borde radius bgcolor margin"><label><strong>Notas:</strong></label></div>
+				<div class="borde_blanco bgcolor margin"><label><strong>Notas:</strong></label></div>
 
 			</div>
 
@@ -442,7 +442,7 @@
 
 <script id="popoverTemplate" type="jquery/x-jquery-tmpl">
 
-	<div class="row bgcolor radius">
+	<div class="row bgcolor">
 
 			<div class="row">
 
