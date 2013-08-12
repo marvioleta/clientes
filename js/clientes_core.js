@@ -410,30 +410,6 @@ $(document).ready(function(){
 
         if (accion == "facturar_sci"){
             $('#nav').fadeOut();
-
-            function facturaSci () {
-                $.ajax({
-                    url:"getFacturaSci.php",
-                    dataType: "json",
-                    success: function(data){
-                        if(typeof data.active_user == 'undefined'){
-                            if(!data.error){
-                                $('#nav').fadeOut();
-                                $(".clientes").empty();
-                                $.tmpl("FacturaSciTmpl",data).appendTo(".clientes");
-                            }else{
-                                alert("No se econtraron resultados");
-                            }
-                        }else{
-                            alert(data.user_message);
-                            window.location="login.php";
-                        }
-                    },
-                    error: function(data){
-                        alert("No se econtraron resultados");
-                    }
-                });
-            }
             facturaSci();
         }
 
@@ -476,105 +452,136 @@ $(document).ready(function(){
     });
 
     //------------------ FUNCIONES DEL DIALOG DE EDICION DE CLIENTES -------------------------- 
-        var cli_cod=$('#cli_cod'),
-            nombre=$('#nombre'),
-            factura=$('#factura'),
-            tipo_cliente=$('#tipo_cliente'),
-            sci=$('#sci'),
-            motor_sci=$('#motor_sci'),
-            web_terminal=$('#web_terminal'),
-            gds_tucano=$('#gds_tucano'),
-            gds_propio=$('#gds_propio'),
-            telefono=$('#telefono'),
-            mail=$('#email'),
-            direccion=$('#direccion'),
-            localidad=$('#localidad'),
-            vendedor=$('#vendedor'),
-            monto_garantia=$('#monto_garantia'),
-            tipo_garantia=$('#tipo_garantia'),
-            limite_credito=$('#limite_credito'),
-            cuit=$('#cuit'),
-            allFields = $( [] ).add( cli_cod ).add( nombre ).add( factura ).add( tipo_cliente )
-                               .add( sci ).add( motor_sci ).add( web_terminal ).add( gds_tucano ).add( gds_propio ).add( telefono )
-                               .add( mail ).add( direccion ).add( localidad ).add( vendedor ).add( monto_garantia ).add( tipo_garantia )
-                               .add( limite_credito ).add( cuit ),tips = $( ".validateTips" );
+    var cli_cod=$('#cli_cod'),
+        nombre=$('#nombre'),
+        factura=$('#factura'),
+        tipo_cliente=$('#tipo_cliente'),
+        sci=$('#sci'),
+        motor_sci=$('#motor_sci'),
+        web_terminal=$('#web_terminal'),
+        gds_tucano=$('#gds_tucano'),
+        gds_propio=$('#gds_propio'),
+        telefono=$('#telefono'),
+        mail=$('#email'),
+        direccion=$('#direccion'),
+        localidad=$('#localidad'),
+        vendedor=$('#vendedor'),
+        monto_garantia=$('#monto_garantia'),
+        tipo_garantia=$('#tipo_garantia'),
+        limite_credito=$('#limite_credito'),
+        cuit=$('#cuit'),
+        allFields = $( [] ).add( cli_cod ).add( nombre ).add( factura ).add( tipo_cliente )
+                           .add( sci ).add( motor_sci ).add( web_terminal ).add( gds_tucano ).add( gds_propio ).add( telefono )
+                           .add( mail ).add( direccion ).add( localidad ).add( vendedor ).add( monto_garantia ).add( tipo_garantia )
+                           .add( limite_credito ).add( cuit ),tips = $( ".validateTips" );
 
-        var tipo_cli = $('#tipo_cli'),
-            fee_cab = $('#fee_cab'),
-            fee_int = $('#fee_int'),
-            comi_over = $('#comi_over'),
-            solo_comi = $('#solo_comi'),
-            cia_com_esp = $('#cia_com_esp'),
-            com_esp = $('#com_esp'),
-            over_com_esp = $('#over_com_esp'),
-            monto_bt1 = $('#monto_bt1'),
-            cia_bt1 = $('#cia_bt1'),
-            monto_bt2 = $('#monto_bt2'),
-            cia_bt2 = $('#cia_bt2'),
-            monto_bt3 = $('#monto_bt3'),
-            cia_bt3 = $('#cia_bt3'),
-            monto_bt4 = $('#monto_bt4'),
-            cia_bt4 = $('#cia_bt4'),
-            fee_re_cab = $('#fee_re_cab'),
-            fee_re_int = $('#fee_re_int'),
-            fee_gu_cab = $('#fee_gu_cab'),
-            fee_gu_int = $('#fee_gu_int'),
-            fee_gu_re_cab = $('#fee_gu_re_cab'),
-            fee_gu_re_int = $('#fee_gu_re_int'),
-            cia_fee1 = $('#cia_fee1'),
-            monto_fee1 = $('#monto_fee1'),
-            cia_fee2 = $('#cia_fee2'),
-            monto_fee2 = $('#monto_fee2'),
-            cia_fee3 = $('#cia_fee3'),
-            monto_fee3 = $('#monto_fee3'),
-            cia_fee4 = $('#cia_fee4'),
-            monto_fee4 = $('#monto_fee4'),
-        campos = $( [] ).add( tipo_cli ).add( fee_cab ).add( fee_int).add( comi_over).add( solo_comi ).add( cia_com_esp )
-                      .add( com_esp ).add( over_com_esp).add( monto_bt1).add( cia_bt1).add( monto_bt2).add( cia_bt2).add( monto_bt3)
-                      .add( cia_bt3).add( monto_bt4).add( cia_bt4 ).add( fee_re_cab).add( fee_re_int).add( fee_gu_cab).add( fee_gu_int)
-                      .add( fee_gu_re_cab).add( fee_gu_re_int)
-                      .add( cia_fee1 ).add( cia_fee2 ).add( cia_fee3 ).add( cia_fee4 )
-                      .add( monto_fee1 ).add( monto_fee2 ).add( monto_fee3 ).add( monto_fee4 );
+    var tipo_cli = $('#tipo_cli'),
+        fee_cab = $('#fee_cab'),
+        fee_int = $('#fee_int'),
+        comi_over = $('#comi_over'),
+        solo_comi = $('#solo_comi'),
+        cia_com_esp = $('#cia_com_esp'),
+        com_esp = $('#com_esp'),
+        over_com_esp = $('#over_com_esp'),
+        monto_bt1 = $('#monto_bt1'),
+        cia_bt1 = $('#cia_bt1'),
+        monto_bt2 = $('#monto_bt2'),
+        cia_bt2 = $('#cia_bt2'),
+        monto_bt3 = $('#monto_bt3'),
+        cia_bt3 = $('#cia_bt3'),
+        monto_bt4 = $('#monto_bt4'),
+        cia_bt4 = $('#cia_bt4'),
+        fee_re_cab = $('#fee_re_cab'),
+        fee_re_int = $('#fee_re_int'),
+        fee_gu_cab = $('#fee_gu_cab'),
+        fee_gu_int = $('#fee_gu_int'),
+        fee_gu_re_cab = $('#fee_gu_re_cab'),
+        fee_gu_re_int = $('#fee_gu_re_int'),
+        cia_fee1 = $('#cia_fee1'),
+        monto_fee1 = $('#monto_fee1'),
+        cia_fee2 = $('#cia_fee2'),
+        monto_fee2 = $('#monto_fee2'),
+        cia_fee3 = $('#cia_fee3'),
+        monto_fee3 = $('#monto_fee3'),
+        cia_fee4 = $('#cia_fee4'),
+        monto_fee4 = $('#monto_fee4'),
+    campos = $( [] ).add( tipo_cli ).add( fee_cab ).add( fee_int).add( comi_over).add( solo_comi ).add( cia_com_esp )
+                  .add( com_esp ).add( over_com_esp).add( monto_bt1).add( cia_bt1).add( monto_bt2).add( cia_bt2).add( monto_bt3)
+                  .add( cia_bt3).add( monto_bt4).add( cia_bt4 ).add( fee_re_cab).add( fee_re_int).add( fee_gu_cab).add( fee_gu_int)
+                  .add( fee_gu_re_cab).add( fee_gu_re_int)
+                  .add( cia_fee1 ).add( cia_fee2 ).add( cia_fee3 ).add( cia_fee4 )
+                  .add( monto_fee1 ).add( monto_fee2 ).add( monto_fee3 ).add( monto_fee4 );
 
-        var comentario=$("#comentario");
+    var comentario=$("#comentario");
 
-        var obs_comerciales = $('#obs_comerciales'),
+    var obs_comerciales = $('#obs_comerciales'),
 
-        obs_atencion = $('#obs_atencion'),
-        obs_tecno = $('#obs_tecno'),
-        campos_comerciales = $([]).add(obs_comerciales)
-                                  .add(obs_atencion)
-                                  .add(obs_tecno);
+    obs_atencion = $('#obs_atencion'),
+    obs_tecno = $('#obs_tecno'),
+    campos_comerciales = $([]).add(obs_comerciales)
+                              .add(obs_atencion)
+                              .add(obs_tecno);
 
-        function updateTips( t ) {
-            tips
-                .text( t )
-                .addClass( "ui-state-highlight" );
-            setTimeout(function() {
-                tips.removeClass( "ui-state-highlight", 1500 );
-            }, 500 );
+    var sci_fac_cli_cod = $('#sci_fac_cli_cod');
+    var sci_nombre_cli  = $('#sci_nombre_cli');
+    var sci_fac_cod     = $('#sci_fac_cod');
+    var sci_fac_campos = $( [] ).add( sci_fac_cli_cod )
+                                .add( sci_nombre_cli )
+                                .add( sci_fac_cod );
+
+    function updateTips( t ) {
+        tips
+            .text( t )
+            .addClass( "ui-state-highlight" );
+        setTimeout(function() {
+            tips.removeClass( "ui-state-highlight", 1500 );
+        }, 500 );
+    }
+
+    function checkLength( o, n, min, max ) {
+        if ( o.val().length > max || o.val().length < min ) {
+            o.addClass( "ui-state-error" );
+            updateTips( "El largo de " + n + " debe ser entre " +
+                min + " y " + max + " caracteres." );
+            return false;
+        } else {
+            return true;
         }
+    }
 
-        function checkLength( o, n, min, max ) {
-            if ( o.val().length > max || o.val().length < min ) {
-                o.addClass( "ui-state-error" );
-                updateTips( "El largo de " + n + " debe ser entre " +
-                    min + " y " + max + " caracteres." );
-                return false;
-            } else {
-                return true;
+    function checkRegexp( o, regexp, n ) {
+        if ( !( regexp.test( o.val() ) ) ) {
+            o.addClass( "ui-state-error" );
+            updateTips( n );
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function facturaSci () {
+        $.ajax({
+            url:"getFacturaSci.php",
+            dataType: "json",
+            success: function(data){
+                if(typeof data.active_user == 'undefined'){
+                    if(!data.error){
+                        $('#nav').fadeOut();
+                        $(".clientes").empty();
+                        $.tmpl("FacturaSciTmpl",data).appendTo(".clientes");
+                    }else{
+                        alert("No se econtraron resultados");
+                    }
+                }else{
+                    alert(data.user_message);
+                    window.location="login.php";
+                }
+            },
+            error: function(data){
+                alert("No se econtraron resultados");
             }
-        }
-
-        function checkRegexp( o, regexp, n ) {
-            if ( !( regexp.test( o.val() ) ) ) {
-                o.addClass( "ui-state-error" );
-                updateTips( n );
-                return false;
-            } else {
-                return true;
-            }
-        }
+        });
+    }
 
     $("#dialog-cliente" ).dialog({
         autoOpen: false,
@@ -608,11 +615,11 @@ $(document).ready(function(){
                                 if(typeof data.active_user == 'undefined'){
                                     if (data.error != "OK"){
                                         alert("Ha ocurrido el siguiente error "+data.error);
-                                        $( this ).dialog( "close" );
+                                        $( "#dialog-cliente" ).dialog( "close" );
                                     }else{
                                         alert(data.error);
                                         location.reload();
-                                        $( this ).dialog( "close" );
+                                        $( "#dialog-cliente" ).dialog( "close" );
                                     }
                                 }else{
                                     alert(data.user_message);
@@ -623,7 +630,7 @@ $(document).ready(function(){
                     }
             },
             "Cancelar": function() {
-                $( this ).dialog( "close" );
+                $( "#dialog-cliente" ).dialog( "close" );
             }
         },
         close: function() {
@@ -658,13 +665,13 @@ $(document).ready(function(){
                                 if(typeof data.active_user == 'undefined'){
                                     if (data.error != "OK"){
                                         alert("Ha ocurrido el siguiente error "+data.error);
-                                        $( this ).dialog( "close" );
+                                        $( "#dialog-tipos" ).dialog( "close" );
                                     }else{
                                         alert(data.error);
                                         location.reload();
-                                        $( this ).dialog( "close" );
+                                        $( "#dialog-tipos" ).dialog( "close" );
                                     }
-                                    $( this ).dialog( "close" );
+                                    $( "#dialog-tipos" ).dialog( "close" );
                                 }else{
                                     alert(data.user_message);
                                     window.location="login.php";
@@ -674,7 +681,7 @@ $(document).ready(function(){
                     }
             },
             "Cancelar": function() {
-                $( this ).dialog( "close" );
+                $( "#dialog-tipos" ).dialog( "close" );
             }
         },
         close: function() {
@@ -708,13 +715,13 @@ $(document).ready(function(){
                                 if(typeof data.active_user == 'undefined'){
                                     if (data.error != "OK"){
                                         alert("Ha ocurrido el siguiente error "+data.error);
-                                        $( this ).dialog( "close" );
+                                        $( "#dialog-comentarios" ).dialog( "close" );
                                     }else{
                                         alert(data.error);
                                         location.reload();
-                                        $( this ).dialog( "close" );
+                                        $( "#dialog-comentarios" ).dialog( "close" );
                                     }
-                                    $( this ).dialog( "close" );
+                                    $( "#dialog-comentarios" ).dialog( "close" );
                                 }else{
                                     alert(data.user_message);
                                     window.location="login.php";
@@ -724,7 +731,7 @@ $(document).ready(function(){
                     }
             },
             "Cancelar": function() {
-                $( this ).dialog( "close" );
+                $( "#dialog-comentarios" ).dialog( "close" );
             }
         },
         close: function() {
@@ -766,13 +773,13 @@ $(document).ready(function(){
                                 if(typeof data.active_user == 'undefined'){
                                     if (data.error != "OK"){
                                         alert("Ha ocurrido el siguiente error "+data.error);
-                                        $( this ).dialog( "close" );
+                                        $( "#dialog-comercial" ).dialog( "close" );
                                     }else{
                                         alert(data.error);
                                         location.reload();
-                                        $( this ).dialog( "close" );
+                                        $( "#dialog-comercial" ).dialog( "close" );
                                     }
-                                    $( this ).dialog( "close" );
+                                    $( "#dialog-comercial" ).dialog( "close" );
                                 }else{
                                     alert(data.user_message);
                                     window.location="login.php";
@@ -782,7 +789,7 @@ $(document).ready(function(){
                     }
             },
             "Cancelar": function() {
-                $( this ).dialog( "close" );
+                $( "#dialog-comercial" ).dialog( "close" );
             }
         },
         close: function() {
@@ -810,13 +817,13 @@ $(document).ready(function(){
                         if(typeof data.active_user == 'undefined'){
                             if (data.error != "OK"){
                                 alert("Ha ocurrido el siguiente error "+data.error);
-                                $( this ).dialog( "close" );
+                                $( "#dialog-map" ).dialog( "close" );
                             }else{
                                 alert(data.error);
                                 location.reload();
-                                $( this ).dialog( "close" );
+                                $( "#dialog-map" ).dialog( "close" );
                             }
-                            $( this ).dialog( "close" );
+                            $( "#dialog-map" ).dialog( "close" );
                         }else{
                             alert(data.user_message);
                             window.location="login.php";
@@ -825,7 +832,7 @@ $(document).ready(function(){
                 });
             },
             "Cancelar": function() {
-                $( this ).dialog( "close" );
+                $( "#dialog-map" ).dialog( "close" );
             }
         },
         close: function() {}
@@ -849,13 +856,13 @@ $(document).ready(function(){
                         if(typeof data.active_user == 'undefined'){
                             if (data.error != "OK"){
                                 alert("Ha ocurrido el siguiente error "+data.error);
-                                $( this ).dialog( "close" );
+                                $( "#dialog-sci-fac" ).dialog( "close" );
                             }else{
                                 alert(data.error);
-                                facturaSci();
-                                $( this ).dialog( "close" );
+                                $( "#dialog-sci-fac" ).dialog( "close" );
                             }
-                            $( this ).dialog( "close" );
+                            facturaSci();
+                            $( "#dialog-sci-fac" ).dialog( "close" );
                         }else{
                             alert(data.user_message);
                             window.location="login.php";
@@ -864,10 +871,12 @@ $(document).ready(function(){
                 });
             },
             "Cancelar": function() {
-                $( this ).dialog( "close" );
+                $( "#dialog-sci-fac" ).dialog( "close" );
             }
         },
-        close: function() {}
+        close: function() {
+            sci_fac_campos.val("");
+        }
     });
     //------------------ FIN DE LAS FUNCIONES DEL DIALOG DE EDICION --------------------------
 

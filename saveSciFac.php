@@ -10,10 +10,10 @@ $query = "INSERT INTO tucanoto_sci.codigos_clientes (nombre_cli,cli_cod,fac_cod)
     ('".$nombre_cli."',
      '".$cli_cod."',
      '".$fac_cod."')";
-
+/*
 echo $query;
 die();
-
+*/
 try {
     $stmt = DB::getStatement($query);
     $stmt->execute();
