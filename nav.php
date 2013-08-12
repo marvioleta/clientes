@@ -1,6 +1,5 @@
 <div class="navbar">
     <div class="navbar-inner">
-        <!--<a class="brand" href="#">Title</a>-->
         <ul class="nav">
             <li class="dropdown" id="term">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Buscar por:&nbsp;<b class="caret"></b></a>
@@ -59,6 +58,21 @@
                     <li><a id="filtro-notas">Notas</a></li>
                 </ul>
             </li>
+            <?php
+                $rol = $_SESSION['rol'];
+                if ($rol == 'a') {
+            ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a id="facturar_sci" href="#">Clientes a Facturar SCI</a></li>
+                        <li><a id="manuales_sci" href="#">Acceso Manuales SCI</a></li>
+                        <li><a id="roles" href="#">Administrar Roles</a></li>
+                    </ul>
+                </li>
+            <?php
+                }
+            ?>            
         </ul><!--nav-->
         <img id="cargando" src="ajax-loader.gif"/>
         <button id="cerrar-sesion" class="btn btn-inverse pull-right" type="submit">Cerrar Sesión</button>
