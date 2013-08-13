@@ -36,14 +36,14 @@
             </li>
             <?php
                 $rol = $_SESSION['rol'];
-                if ($rol == 'a' || $rol == 'adm' || $rol == 'l') {
+                if ($rol == 'a' || $rol == 'adm' || $rol == 'l' || $rol == 'edit') {
             ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">CREAR<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a id="crear" href="#">Cliente</a></li>
                         <?php
-                        if ($rol == 'a') {
+                        if ($rol == 'a' || $rol == 'edit') {
                             ?>
                         <li><a id="crear-tipo" href="#">Tipo de Cliente</a></li>
                         <?php } ?>
@@ -60,7 +60,7 @@
             </li>
             <?php
                 $rol = $_SESSION['rol'];
-                if ($rol == 'a') {
+                if ($rol == 'a' || $rol == 'edit') {
             ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar<b class="caret"></b></a>
