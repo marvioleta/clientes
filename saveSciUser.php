@@ -6,6 +6,19 @@ $empresa = $_POST['empresa'];
 $user    = $_POST['user'];
 $psw    = $_POST['psw'];
 
+if (empty($empresa)) {
+    throw new Exception("El campo empresa no puede estar vacío.", 1);
+}
+
+if (empty($user)) {
+    throw new Exception("El campo usuario no puede estar vacío.", 1);
+}
+
+if (empty($psw)) {
+    throw new Exception("El campo password no puede estar vacío.", 1);
+}
+
+
 $query = "INSERT INTO tucanoto_sci.sci_usuarios (empresa,user,psw) VALUES
     ('".$empresa."',
      '".$user."',

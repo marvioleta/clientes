@@ -562,10 +562,10 @@ $(document).ready(function(){
                               .add(obs_tecno);
 
     var sci_fac_cli_cod = $('#sci_fac_cli_cod');
-    var sci_nombre_cli  = $('#sci_nombre_cli');
+    var sci_fac_nombre_cli  = $('#sci_fac_nombre_cli');
     var sci_fac_cod     = $('#sci_fac_cod');
     var sci_fac_campos = $( [] ).add( sci_fac_cli_cod )
-                                .add( sci_nombre_cli )
+                                .add( sci_fac_nombre_cli )
                                 .add( sci_fac_cod );
 
     var sci_user_empresa = $('#sci_user_empresa');
@@ -916,29 +916,37 @@ $(document).ready(function(){
         buttons: {
             "Guardar": function() {
                 var formData = $('#dialog-sci-fac form').serialize();
+                var bValid = true;
 
-                $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    url: 'saveSciFac.php',
-                    data: formData,
-                    success: function(data){
-                        if(typeof data.active_user == 'undefined'){
-                            if (data.error != "OK"){
-                                alert("Ha ocurrido el siguiente error "+data.error);
+                sci_fac_campos.removeClass( "ui-state-error" );
+                bValid = bValid && checkLength( sci_fac_nombre_cli, "Cliente SCI", 1, 80 );
+                bValid = bValid && checkLength( sci_fac_cli_cod, "Código VSTOUR", 2, 5 );
+                bValid = bValid && checkLength( sci_fac_cod, "Código a Facturar", 2, 5 );
+
+                if( bValid ){
+                    $.ajax({
+                        type: 'post',
+                        dataType: 'json',
+                        url: 'saveSciFac.php',
+                        data: formData,
+                        success: function(data){
+                            if(typeof data.active_user == 'undefined'){
+                                if (data.error != "OK"){
+                                    alert("Ha ocurrido el siguiente error "+data.error);
+                                    $( "#dialog-sci-fac" ).dialog( "close" );
+                                }else{
+                                    alert(data.error);
+                                    $( "#dialog-sci-fac" ).dialog( "close" );
+                                }
+                                facturaSci();
                                 $( "#dialog-sci-fac" ).dialog( "close" );
                             }else{
-                                alert(data.error);
-                                $( "#dialog-sci-fac" ).dialog( "close" );
+                                alert(data.user_message);
+                                window.location="login.php";
                             }
-                            facturaSci();
-                            $( "#dialog-sci-fac" ).dialog( "close" );
-                        }else{
-                            alert(data.user_message);
-                            window.location="login.php";
                         }
-                    }
-                });
+                    });
+                }
             },
             "Cancelar": function() {
                 $( "#dialog-sci-fac" ).dialog( "close" );
@@ -957,29 +965,37 @@ $(document).ready(function(){
         buttons: {
             "Guardar": function() {
                 var formData = $('#dialog-sci-user form').serialize();
+                var bValid = true;
 
-                $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    url: 'saveSciUser.php',
-                    data: formData,
-                    success: function(data){
-                        if(typeof data.active_user == 'undefined'){
-                            if (data.error != "OK"){
-                                alert("Ha ocurrido el siguiente error "+data.error);
+                sci_user_campos.removeClass( "ui-state-error" );
+                bValid = bValid && checkLength( sci_user_empresa, "Empresa", 1, 80 );
+                bValid = bValid && checkLength( sci_user_psw, "Password", 6, 15 );
+                bValid = bValid && checkRegexp( sci_user, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "ej. tu@email.com" );
+
+                if( bValid ){
+                    $.ajax({
+                        type: 'post',
+                        dataType: 'json',
+                        url: 'saveSciUser.php',
+                        data: formData,
+                        success: function(data){
+                            if(typeof data.active_user == 'undefined'){
+                                if (data.error != "OK"){
+                                    alert("Ha ocurrido el siguiente error "+data.error);
+                                    $( "#dialog-sci-user" ).dialog( "close" );
+                                }else{
+                                    alert(data.error);
+                                    $( "#dialog-sci-user" ).dialog( "close" );
+                                }
+                                usuariosSci();
                                 $( "#dialog-sci-user" ).dialog( "close" );
                             }else{
-                                alert(data.error);
-                                $( "#dialog-sci-user" ).dialog( "close" );
+                                alert(data.user_message);
+                                window.location="login.php";
                             }
-                            usuariosSci();
-                            $( "#dialog-sci-user" ).dialog( "close" );
-                        }else{
-                            alert(data.user_message);
-                            window.location="login.php";
                         }
-                    }
-                });
+                    });
+                }
             },
             "Cancelar": function() {
                 $( "#dialog-sci-user" ).dialog( "close" );

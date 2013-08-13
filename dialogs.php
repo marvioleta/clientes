@@ -318,7 +318,7 @@
             <div class="row"><p class="validateTips"><strong>Complete los datos</strong></p></div>
             <div class="row">
                 <div class="span2"><label>Cliente</label></div>
-                <div class="span3"><input class="input" id="sci_nombre_cli" name="nombre_cli" size="30"></div>
+                <div class="span3"><input class="input" id="sci_fac_nombre_cli" name="nombre_cli" size="30"></div>
             </div>
             <div class="row">
                 <div class="span2"><label>Código Vstour</label></div>

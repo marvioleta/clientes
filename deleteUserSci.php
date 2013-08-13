@@ -4,6 +4,10 @@ require_once 'db.class.php';
 
 $id_sci_user=$_GET['id_sci_user'];
 
+if (empty($id_sci_user)) {
+	throw new Exception("El campo con el usuario no puede estar vacío.", 1);
+}
+
 $query="DELETE FROM tucanoto_sci.sci_usuarios WHERE id_sci_user='".$id_sci_user."'";
 
 /*
