@@ -286,3 +286,24 @@
             {{/each}}
     </div>
 </script>
+
+<script id="sciUsersTemplate" type="jquery/x-jquery-tmpl">
+    <div class="row bgcolor">
+            <div class="row">
+                <div class="span4">Empresa
+                    <a id="agregar-sci-user" class="btn btn-mini btn-inverse">Agregar Nuevo</a>
+                </div>
+                <div class="span2">Usuario</div>
+                <div class="span2">Password</div>
+                <div class="span4">Acciones</div>
+            </div>
+            {{each sci_user}}
+                <div class="row">
+                    <div class="span4">${empresa}</div>
+                    <div class="span2">${user}</div>
+                    <div class="span2">${psw}</div>
+                    <div class="span4"><a class="borrar float-right" nombre="${empresa}" id="borrar-sci-user" href="#" id_sci_user="${id_sci_user}" value="borrar">Borrar</a></div>
+                </div>
+            {{/each}}
+    </div>
+</script>

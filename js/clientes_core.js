@@ -5,8 +5,10 @@ $(document).ready(function(){
     $('#tiposTemplate').template("TipoTmpl");
     //template de los popovers
     $('#popoverTemplate').template("PopTmpl");
-    //template de los popovers
+    //template de los clientes a facturar
     $('#sciFacturaTemplate').template("FacturaSciTmpl");
+    //template de usuarios sci acceso a manuales
+    $('#sciUsersTemplate').template("userSciTmpl");
 
     //AJAX LOADING GIF
     $("body").ajaxStart(function(){$("#cargando").fadeIn('fast');})
@@ -445,6 +447,43 @@ $(document).ready(function(){
             }
         }
 
+        if (accion == "manuales_sci"){
+            $('#nav').fadeOut();
+            usuariosSci();
+        }
+
+        if (accion == "agregar-sci-user"){
+            var action = $(this).attr('id');
+            $('body').data('action', action);
+            $( "#dialog-sci-user" ).dialog( "open" );
+        }
+
+        if (accion == "borrar-sci-user"){
+            var id_sci_user = $(this).attr('id_sci_user');
+            var nombre = $(this).attr('nombre');
+            var dt = confirm("Esta seguro de borrar el usuario " + nombre + "?");
+
+            if (dt) {
+                $.ajax({
+                    url:"deleteUserSci.php?id_sci_user=" + id_sci_user,
+                    dataType: "json",
+                    success: function(data){
+                        if(typeof data.active_user == 'undefined'){
+                            if (data.error != "OK"){
+                                alert("Ha ocurrido el siguiente error "+data.error);
+                            }else{
+                                alert(data.error);
+                                usuariosSci();
+                            }
+                        }else{
+                            alert(data.user_message);
+                            window.location="login.php";
+                        }
+                    }
+                });
+            }
+        }
+
     });
 
     $('#cia_especifica').on('click',function(){
@@ -529,6 +568,13 @@ $(document).ready(function(){
                                 .add( sci_nombre_cli )
                                 .add( sci_fac_cod );
 
+    var sci_user_empresa = $('#sci_user_empresa');
+    var sci_user  = $('#sci_user');
+    var sci_user_psw     = $('#sci_user_psw');
+    var sci_user_campos = $( [] ).add( sci_user_empresa )
+                                .add( sci_user )
+                                .add( sci_user_psw );
+
     function updateTips( t ) {
         tips
             .text( t )
@@ -569,6 +615,30 @@ $(document).ready(function(){
                         $('#nav').fadeOut();
                         $(".clientes").empty();
                         $.tmpl("FacturaSciTmpl",data).appendTo(".clientes");
+                    }else{
+                        alert("No se econtraron resultados");
+                    }
+                }else{
+                    alert(data.user_message);
+                    window.location="login.php";
+                }
+            },
+            error: function(data){
+                alert("No se econtraron resultados");
+            }
+        });
+    }
+
+    function usuariosSci () {
+        $.ajax({
+            url:"getUserSci.php",
+            dataType: "json",
+            success: function(data){
+                if(typeof data.active_user == 'undefined'){
+                    if(!data.error){
+                        $('#nav').fadeOut();
+                        $(".clientes").empty();
+                        $.tmpl("userSciTmpl",data).appendTo(".clientes");
                     }else{
                         alert("No se econtraron resultados");
                     }
@@ -876,6 +946,47 @@ $(document).ready(function(){
         },
         close: function() {
             sci_fac_campos.val("");
+        }
+    });
+
+    $("#dialog-sci-user" ).dialog({
+        autoOpen: false,
+        height: 200,
+        width: 400,
+        modal: true,
+        buttons: {
+            "Guardar": function() {
+                var formData = $('#dialog-sci-user form').serialize();
+
+                $.ajax({
+                    type: 'post',
+                    dataType: 'json',
+                    url: 'saveSciUser.php',
+                    data: formData,
+                    success: function(data){
+                        if(typeof data.active_user == 'undefined'){
+                            if (data.error != "OK"){
+                                alert("Ha ocurrido el siguiente error "+data.error);
+                                $( "#dialog-sci-user" ).dialog( "close" );
+                            }else{
+                                alert(data.error);
+                                $( "#dialog-sci-user" ).dialog( "close" );
+                            }
+                            usuariosSci();
+                            $( "#dialog-sci-user" ).dialog( "close" );
+                        }else{
+                            alert(data.user_message);
+                            window.location="login.php";
+                        }
+                    }
+                });
+            },
+            "Cancelar": function() {
+                $( "#dialog-sci-user" ).dialog( "close" );
+            }
+        },
+        close: function() {
+            sci_user_campos.val("");
         }
     });
     //------------------ FIN DE LAS FUNCIONES DEL DIALOG DE EDICION --------------------------
