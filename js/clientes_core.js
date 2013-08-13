@@ -9,6 +9,8 @@ $(document).ready(function(){
     $('#sciFacturaTemplate').template("FacturaSciTmpl");
     //template de usuarios sci acceso a manuales
     $('#sciUsersTemplate').template("userSciTmpl");
+        //template de administrar roles de usuarios
+    $('#usersTemplate').template("usersTmpl");
 
     //AJAX LOADING GIF
     $("body").ajaxStart(function(){$("#cargando").fadeIn('fast');})
@@ -484,10 +486,84 @@ $(document).ready(function(){
             }
         }
 
+        if (accion == "roles"){
+            $('#nav').fadeOut();
+            usuarios();
+        }
+
+        if (accion == "agregar-user"){
+            var action = $(this).attr('id');
+            $('body').data('action', action);
+            $( "#dialog-user" ).dialog( "open" );
+        }
+
+        if (accion == "editar-user"){
+            $('select[name="rol"]').html('');
+            var iduser =$(this).attr('id_user');
+            var action=$(this).attr('id');
+
+            $('body').data('id_user',iduser);
+            $('body').data('action', action);
+
+            $.ajax({
+                type:'POST',
+                data:'id_user=' + iduser,
+                url:'getUsers.php',
+                dataType:'json',
+                success: function(data){
+                    if(typeof data.active_user == 'undefined'){
+                        if (!data.error) {
+                            $("#dialog-user #user").attr("value",data.usuarios[0].usuario);
+                            $("#dialog-user #psw").attr("value",data.usuarios[0].psw);
+
+                            for (var i = 0; i < data.roles.length; i++) {
+                                $('select[name="rol"]').append('<option value="' + data.roles[i].rol + '">' + data.roles[i].descripcion + '</option>');                                
+                            }
+
+                            $("#dialog-user #rol").attr("value",data.usuarios[0].rol);
+                            $("#dialog-user #sine_sabre").attr("value",data.usuarios[0].sine_sabre);
+                            $("#dialog-user #sine_amadeus").attr("value",data.usuarios[0].sine_amadeus);
+                            $( "#dialog-user" ).dialog( "open" );
+                        }else{
+                            alert(data.error);
+                        }
+                    }else{
+                        alert(data.user_message);
+                        window.location="login.php";
+                    }
+                }
+            });
+        }
+
+        if (accion == "borrar-user"){
+            var id_user = $(this).attr('id_user');
+            var nombre = $(this).attr('nombre');
+            var dt = confirm("Esta seguro de borrar el usuario " + nombre + "?");
+
+            if (dt) {
+                $.ajax({
+                    url:"deleteUsers.php?id_user=" + id_user,
+                    dataType: "json",
+                    success: function(data){
+                        if(typeof data.active_user == 'undefined'){
+                            if (data.error != "OK"){
+                                alert("Ha ocurrido el siguiente error "+data.error);
+                            }else{
+                                alert(data.error);
+                                usuarios();
+                            }
+                        }else{
+                            alert(data.user_message);
+                            window.location="login.php";
+                        }
+                    }
+                });
+            }
+        }
     });
 
     $('#cia_especifica').on('click',function(){
-        $('#com-especial').slideToggle('slow');     
+        $('#com-especial').slideToggle('slow');
     });
 
     //------------------ FUNCIONES DEL DIALOG DE EDICION DE CLIENTES -------------------------- 
@@ -575,6 +651,13 @@ $(document).ready(function(){
                                 .add( sci_user )
                                 .add( sci_user_psw );
 
+    var user = $('#user'),
+        psw = $('#psw'),
+        rol = $('#rol'),
+        sine_sabre = $('#sine_sabre'),
+        sine_amadeus = $('#sine_amadeus');
+    var user_campos = $([]).add(user).add(psw).add(rol).add(sine_sabre).add(sine_amadeus)
+
     function updateTips( t ) {
         tips
             .text( t )
@@ -639,6 +722,34 @@ $(document).ready(function(){
                         $('#nav').fadeOut();
                         $(".clientes").empty();
                         $.tmpl("userSciTmpl",data).appendTo(".clientes");
+                    }else{
+                        alert("No se econtraron resultados");
+                    }
+                }else{
+                    alert(data.user_message);
+                    window.location="login.php";
+                }
+            },
+            error: function(data){
+                alert("No se econtraron resultados");
+            }
+        });
+    }
+
+    function usuarios () {
+        $('select[name="rol"]').html('');
+        $.ajax({
+            url:"getUsers.php",
+            dataType: "json",
+            success: function(data){
+                if(typeof data.active_user == 'undefined'){
+                    if(!data.error){
+                        $('#nav').fadeOut();
+                        $(".clientes").empty();
+                        for (var i = 0; i < data.roles.length; i++) {
+                            $('select[name="rol"]').append('<option value="' + data.roles[i].rol + '">' + data.roles[i].descripcion + '</option>');                                
+                        }
+                        $.tmpl("usersTmpl",data).appendTo(".clientes");
                     }else{
                         alert("No se econtraron resultados");
                     }
@@ -1003,6 +1114,59 @@ $(document).ready(function(){
         },
         close: function() {
             sci_user_campos.val("");
+        }
+    });
+
+    $("#dialog-user" ).dialog({
+        autoOpen: false,
+        height: 300,
+        width: 400,
+        modal: true,
+        buttons: {
+            "Guardar": function() {
+                var formData = $('#dialog-user form').serialize();
+                var accion = $('body').data('action');
+                var id_user = $('body').data('id_user');
+                var bValid = true;
+
+                sci_user_campos.removeClass( "ui-state-error" );
+                bValid = bValid && checkLength( user, "Usuario", 1, 80 );
+                bValid = bValid && checkLength( psw, "Password", 6, 15 );
+                bValid = bValid && checkLength( rol, "Rol", 1, 10 );
+                bValid = bValid && checkLength( sine_sabre, "Sine Sabre", 2, 2 );
+                bValid = bValid && checkLength( sine_amadeus, "Sine Amadeus", 2, 2 );
+
+                if( bValid ){
+                    $.ajax({
+                        type: 'post',
+                        dataType: 'json',
+                        url: 'saveUsers.php?acc=' + accion + '&id_user=' + id_user,
+                        data: formData,
+                        success: function(data){
+                            if(typeof data.active_user == 'undefined'){
+                                if (!data.error){
+                                    alert('OK');
+                                    usuarios();
+                                    $( "#dialog-user" ).dialog( "close" );
+                                }else{
+                                    alert(data.error);
+                                    //$( "#dialog-user" ).dialog( "close" );
+                                }
+                            }else{
+                                $( "#dialog-user" ).dialog( "close" );
+                                alert(data.user_message);
+                                window.location="login.php";
+                            }
+                        }
+                    });
+                }
+            },
+            "Cancelar": function() {
+                $( "#dialog-user" ).dialog( "close" );
+            }
+        },
+        close: function() {
+            user_campos.val("");
         }
     });
     //------------------ FIN DE LAS FUNCIONES DEL DIALOG DE EDICION --------------------------

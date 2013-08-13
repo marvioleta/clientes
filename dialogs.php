@@ -332,7 +332,7 @@
     </form>
 </div>
 
-<div id="dialog-sci-user" title="Códigos de clientes a Facturar">
+<div id="dialog-sci-user" title="Acceso a documentación SCI">
     <form>
         <div class="span5">
             <div class="row"><p class="validateTips"><strong>Complete los datos</strong></p></div>
@@ -347,6 +347,37 @@
             <div class="row">
                 <div class="span2"><label>Password</label></div>
                 <div class="span3"><input class="input" id="sci_user_psw" name="psw" size="30"></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="dialog-user" title="Administrar Roles de Usuarios">
+    <form>
+        <div class="span5">
+            <div class="row"><p class="validateTips"><strong>Complete los datos</strong></p></div>
+            <div class="row">
+                <div class="span2"><label>Usuario</label></div>
+                <div class="span3"><input class="input" id="user" name="usuario" size="30"></div>
+            </div>
+            <div class="row">
+                <div class="span2"><label>Password</label></div>
+                <div class="span3"><input class="input" id="psw" name="psw" size="30"></div>
+            </div>
+            <div class="row">
+                <div class="span2"><label>Rol</label></div>
+                <div class="span3">
+                    <!-- <input class="input" id="rol" name="rol" size="30"> -->
+                    <select id="rol" name="rol"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span2"><label>Sine Sabre</label></div>
+                <div class="span3"><input class="input" id="sine_sabre" name="sine_sabre" size="30"></div>
+            </div>
+            <div class="row">
+                <div class="span2"><label>Sine Amadeus</label></div>
+                <div class="span3"><input class="input" id="sine_amadeus" name="sine_amadeus" size="30"></div>
             </div>
         </div>
     </form>

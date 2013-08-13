@@ -307,3 +307,44 @@
             {{/each}}
     </div>
 </script>
+
+<script id="usersTemplate" type="jquery/x-jquery-tmpl">
+    <div class="row bgcolor">
+            <div class="row">
+                <div class="span4">Rol</div>
+                <div class="span4">Nombre</div>
+                <div class="span4">Descripción</div>
+            </div>
+            {{each roles}}
+                <div class="row">
+                    <div class="span4">${rol}</div>
+                    <div class="span4">${descripcion}</div>
+                    <div class="span4">${detalle}</div>
+                </div>
+            {{/each}}
+            <div class="row">
+                <hr>
+            </div>
+            <div class="row">
+                <div class="span2">Usuario
+                    <a id="agregar-user" class="btn btn-mini btn-inverse">Agregar Nuevo</a>
+                </div>
+                <div class="span2">Password</div>
+                <div class="span2">Rol</div>
+                <div class="span1">Sine Sabre</div>
+                <div class="span1">Sine Amadeus</div>
+                <div class="span2">Acciones</div>
+            </div>
+            {{each usuarios}}
+                <div class="row">
+                    <div class="span2">${usuario}</div>
+                    <div class="span2">${psw}</div>
+                    <div class="span2">${descripcion}</div>
+                    <div class="span1">${sine_sabre}</div>
+                    <div class="span1">${sine_amadeus}</div>
+                    <div class="span1"><a class="editar float-right" nombre="${usuario}" id="editar-user" href="#" id_user="${id_user}" value="editar">Editar</a></div>
+                    <div class="span1"><a class="borrar float-right" nombre="${usuario}" id="borrar-user" href="#" id_user="${id_user}" value="borrar">Borrar</a></div>
+                </div>
+            {{/each}}
+    </div>
+</script>
