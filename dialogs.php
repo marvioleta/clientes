@@ -133,7 +133,7 @@
             <td><input class="input" name="solo_comi" id="solo_comi" /></td>
         </tr>
         <tr>
-            <td colspan="2"><a href="#" class="btn btn-mini btn-inverse" id="cia_especifica">Agregar Línea Aérea específica</a></td>
+            <td colspan="2"><a href="#" class="btn btn-mini btn-danger" id="cia_especifica">Agregar Línea Aérea específica</a></td>
         </tr>
         <tr>
             <td colspan="2">

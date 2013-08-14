@@ -11,7 +11,7 @@ include "form_login.php";
     	<link href="clientes.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <div id="login" class="box shadow">
+        <div id="login" class="box shadow borde_blanco">
             <div style="width:250px; margin-left:auto; margin-right:auto; margin-bottom:30px">
                 <img alt="Tucano Tours SRL" src="img/tucano-tours.png"/>
             </div>
