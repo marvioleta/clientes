@@ -25,7 +25,7 @@ $(document).ready(function(){
     });
 
     // Esta funcion asigna el valor elegido al boton correspondiente
-    $('.dropdown-menu li a').on('click', function(){
+    $('#term .dropdown-menu li a').on('click', function(){
         that = $(this);
         fieldContainer = $(this).parent().parent().parent();
         txt = that.html();
@@ -672,8 +672,9 @@ $(document).ready(function(){
             .text( t )
             .addClass( "ui-state-highlight" );
         setTimeout(function() {
-            tips.removeClass( "ui-state-highlight", 1500 );
-        }, 500 );
+            tips.removeClass( "ui-state-highlight", 3500 );
+            tips.html( "<strong>Complete los datos</strong>");
+        }, 5000 );
     }
 
     function checkLength( o, n, min, max ) {
@@ -1138,7 +1139,7 @@ $(document).ready(function(){
                 var id_user = $('body').data('id_user');
                 var bValid = true;
 
-                sci_user_campos.removeClass( "ui-state-error" );
+                user_campos.removeClass( "ui-state-error" );
                 bValid = bValid && checkLength( user, "Usuario", 1, 80 );
                 bValid = bValid && checkLength( psw, "Password", 6, 15 );
                 bValid = bValid && checkLength( rol, "Rol", 1, 10 );
