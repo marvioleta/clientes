@@ -22,10 +22,10 @@
                 </ul>
             </li>
             <form class="navbar-search" action="">
-                <input class="search-query span2" type="text" placeholder="Search">
-                <button class="btn btn-danger btn-mini" type="submit">
+                <input id="searchTerm" class="search-query span2" type="text" placeholder="Search">
+                <a id="buscar" class="btn btn-danger btn-mini">
                     <i class="icon-search icon-white"></i>
-                </button>
+                </a>
             </form>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">VER<b class="caret"></b></a>

@@ -24,6 +24,14 @@ $(document).ready(function(){
         $(".tabla-comentarios .row:odd").addClass("odd-row radius shadow");
     });
 
+    // Esta funcion asigna el valor elegido al boton correspondiente
+    $('.dropdown-menu li a').on('click', function(){
+        that = $(this);
+        fieldContainer = $(this).parent().parent().parent();
+        txt = that.html();
+        fieldContainer.children('a:first').html(txt);
+    });
+
     //se inicia la variable va a contener el this del popover
     var pop;
     //al iniciar se dispara el template de lso clientes 
@@ -276,7 +284,7 @@ $(document).ready(function(){
 
         if (accion == "buscar"){
             //hago la busqueda definiendo el WHERE y el LIKE 
-            var where=$('#term').val();
+            var where=$('#term').find('a:first').html();
             var igual=$('#searchTerm').val();
 
             if (igual) {
@@ -290,6 +298,7 @@ $(document).ready(function(){
                             if(!data.error){
                                 $('#nav').fadeOut();
                                 $(".clientes").empty();
+                                $('#term').find('a:first').html('Buscar por <b class="caret"></b>');
                                 $.tmpl("ClientTmpl",data).appendTo(".clientes");
                             }else{
                                 alert("No se econtraron resultados");
